@@ -1,0 +1,76 @@
+--LIBRARY ieee;
+--USE ieee.numeric_std.all; 
+--USE ieee.std_logic_1164.all;
+--use std.textio.all;
+----use std.env.finish;
+--
+--entity TestFSM is 
+--port (--tbClock: in std_logic;
+--		tbReset: in std_logic;
+--			tbfsm : in std_logic_vector(7 downto 0);
+--			tbdir : out std_logic;
+--			tbfsm_type :out std_logic);
+--end TestFSM; 
+--
+--architecture behaviour of TestFSM is
+--
+--signal tbClock : std_logic; 
+--constant clk_hz : integer := 100e6;
+--constant clk_period : time := 1 sec / clk_hz;
+--
+--signal clk : std_logic := '1';
+--signal rst : std_logic := '1';
+--
+--
+--	Component FSM is 
+--		port (clock: in std_logic;
+--			reset: in std_logic;
+--			fsm : out std_logic_vector(7 downto 0);
+--			dir : in std_logic;
+--			fsm_type :out std_logic);
+--	end component; 
+--	
+----	component ClkDivider is 
+----		port (Clock_In: in std_logic;
+----		Clock_Out: out std_logic);	
+----	end component; 
+--
+--begin
+--    clk <= not clk after clk_period / 2;
+--
+--
+--    DUT : fsm
+--    port map (clock => clk, reset => tbReset, dir => tbdir, fsm_type => tbfsm_type, fsm => tbfsm);
+--    --obj1: FSM
+--	 --port map ( clock =>  SlowClk, reset => NOT KEY(3), fsm=>LCD_DATA, dir=>SW(0), fsm_type=> LCD_RS);   
+-- 
+--    SEQUENCER_PROC : process
+--    begin
+--        wait for clk_period * 2;
+--
+--        rst <= '1';
+--
+--        wait for clk_period * 10;
+--		  
+--		  dir<= '1';
+--		  
+--		  wait for clk_period * 10;
+--		  
+--		  dir<= '0';
+--		  
+--		  wait for clk_period * 10;
+--		  
+--		  dir<= '0';
+--        --assert false
+--         --   report "Replace this with your test cases"
+--         --   severity failure;
+--
+--        finish;
+--    end process;
+--
+--
+----obj1: ClkDivider
+----port map ( Clock_In =>  CLOCK_50, Clock_Out => SlowClk);
+--
+--end behaviour;
+

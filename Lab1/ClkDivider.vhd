@@ -1,0 +1,27 @@
+LIBRARY ieee;
+USE ieee.numeric_std.all; 
+USE ieee.std_logic_1164.all;
+
+entity ClkDivider is 
+
+	port (Clock_In: in std_logic;
+		Clock_Out: out std_logic);	
+end ClkDivider; 
+
+architecture behaviour of ClkDivider is
+signal count: integer:=1;
+signal tmp : std_logic := '0';
+  
+begin
+	process(Clock_In)
+	begin
+		if(rising_edge(Clock_In)) then
+		count <=count+1;
+			if (count = 25000000) then
+			tmp <= NOT tmp;
+			count <= 1;
+			end if;
+		end if;
+		Clock_Out <= tmp;
+	end process;
+end behaviour;
