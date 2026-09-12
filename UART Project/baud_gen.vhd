@@ -27,8 +27,14 @@ end entity;
 
 architecture bhv of baud_gen is
 
-	-- signal count_reg	:	unsigned(15 downto 0);
-	-- signal count		:	unsigned(15 downto 0);
+	-- The transmitter/receiver FSMs advance one bit per clk_in rising edge
+	-- of baud_out directly (they don't do their own 16x oversampling), so
+	-- baud_out needs to actually pulse at BAUD_RATE Hz. This used to be a
+	-- hardcoded "count = 15", i.e. one pulse every 16 CLOCK_50 cycles =
+	-- 3.125 MHz -- about 325x faster than 9600 baud, and completely
+	-- disconnected from the BAUD_RATE generic. Compute it from the
+	-- generics instead so a change to CLOCK or BAUD_RATE stays correct.
+	constant CLKS_PER_BIT : integer := (CLOCK / BAUD_RATE) - 1;
 
 begin
 
@@ -46,8 +52,7 @@ begin
 		elsif (rising_edge(clk_in)) then
 			
 			-- If we are at Baud rate, then...
-			-- (CLOCK/(16*BAUD_RATE))-1
-			if(count = 15) then
+			if(count = CLKS_PER_BIT) then
 			
 				count := 0; -- Reset counter
 				baud_out <= '1'; -- Activate baud_rate clock
